@@ -63,8 +63,8 @@ export function Contact() {
           <p className="section-label">Contact</p>
           <h2 className="section-title">Let’s build the next system together.</h2>
           <p className="section-lead">
-            Open to Backend Engineer, Applied AI / ML Engineer, and Distributed Systems
-            opportunities. Reach out for collaborations, roles, or a quick chat.
+            Open to software engineering, machine learning, AI systems, cloud engineering, and
+            backend architecture roles. Reach out for collaborations, opportunities, or a quick chat.
           </p>
 
           <div className="contact-links">
@@ -100,7 +100,7 @@ export function Contact() {
           <span>
             © {new Date().getFullYear()} {profile.name}
           </span>
-          <span>Backend Engineer · Applied AI / ML · IIT Kharagpur</span>
+          <span>Software Engineer · IIT Kharagpur · LeetCode Knight</span>
         </footer>
       </div>
     </section>

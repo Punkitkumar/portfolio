@@ -33,6 +33,7 @@ export function Hero() {
       const highlights = root.querySelectorAll(".hero-highlight")
       const role = root.querySelector(".hero-role")
       const chars = root.querySelectorAll(".char-inner")
+      const tagline = root.querySelector(".hero-tagline")
       const headline = root.querySelector(".hero-headline")
       const actions = root.querySelectorAll(".hero-actions a")
       const scroll = root.querySelector(".hero-scroll")
@@ -87,13 +88,22 @@ export function Hero() {
           0.35,
         )
         .from(
+          tagline,
+          {
+            y: 18,
+            duration: 0.65,
+            clearProps: "transform",
+          },
+          0.5,
+        )
+        .from(
           headline,
           {
             y: 24,
             duration: 0.75,
             clearProps: "transform",
           },
-          0.55,
+          0.58,
         )
         .from(
           actions,
@@ -105,7 +115,7 @@ export function Hero() {
             ease: "back.out(1.6)",
             clearProps: "transform",
           },
-          0.65,
+          0.7,
         )
         .from(
           scroll,
@@ -114,12 +124,12 @@ export function Hero() {
             duration: 0.6,
             clearProps: "transform",
           },
-          0.8,
+          0.85,
         )
 
       // Failsafe: if anything stuck mid-tween, force content visible
       failsafe = window.setTimeout(() => {
-        gsap.set([highlights, role, chars, headline, actions, scroll], {
+        gsap.set([highlights, role, chars, tagline, headline, actions, scroll], {
           autoAlpha: 1,
           clearProps: "opacity,visibility",
         })
@@ -199,6 +209,7 @@ export function Hero() {
           <span className="line">{splitChars(lastName)}</span>
         </h1>
 
+        <p className="hero-tagline hero-anim">{profile.tagline}</p>
         <p className="hero-headline hero-anim">{profile.headline}</p>
 
         <div className="hero-actions">

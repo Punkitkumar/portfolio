@@ -2,18 +2,18 @@ import { useLayoutEffect, useRef } from "react"
 import gsap from "gsap"
 
 const ITEMS = [
-  "Backend Engineer",
-  "Applied AI / ML",
-  "Distributed Systems",
-  "RAG",
-  "MCP Agents",
-  "Hybrid Search",
+  "Software Engineer",
+  "Backend Architecture",
+  "RAG & MCP Agents",
+  "Cloud-Native Microservices",
   "Spring Boot",
   "Kafka",
+  "Kubernetes",
   "Standard Chartered",
   "IIT Kharagpur",
   "LeetCode Knight",
-  "FastAPI",
+  "Codeforces Expert",
+  "AlgoZenith Mentor",
 ]
 
 export function InfiniteMarquee() {

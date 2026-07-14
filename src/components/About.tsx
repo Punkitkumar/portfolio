@@ -6,7 +6,8 @@ import { Reveal, Stagger } from "./Reveal"
 const stats = [
   { value: "60–70%", label: "Story investigation time saved via MCP agents" },
   { value: "30,000+", label: "Confluence pages in production RAG corpus" },
-  { value: "Top 2.9%", label: "LeetCode ranking · Knight 1968" },
+  { value: "Knight", label: "LeetCode Top 2.9% · 1968 rating" },
+  { value: "Expert", label: "Codeforces 1780 · CodeChef 4★" },
 ]
 
 export function About() {
@@ -85,7 +86,7 @@ export function About() {
       <div className="container">
         <Reveal>
           <p className="section-label">About</p>
-          <h2 className="section-title">Backend systems meet applied AI at scale.</h2>
+          <h2 className="section-title">Algorithms, systems, and production AI.</h2>
         </Reveal>
 
         <div className="about-grid">
@@ -93,9 +94,9 @@ export function About() {
             <div className="about-text">
               <p>{profile.summary}</p>
               <p>
-                Interested in roles spanning Backend Engineer, Applied AI / ML Engineer, and
-                Distributed Systems — where reliable services, retrieval systems, and intelligent
-                automation meet.
+                Driven by innovation and continuous improvement — open to software engineering,
+                machine learning, AI systems, cloud engineering, and backend architecture roles
+                where ownership and delivery matter.
               </p>
               <div className="interest-row">
                 {profile.interests.map((item) => (

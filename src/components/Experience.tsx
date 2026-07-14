@@ -44,8 +44,9 @@ export function Experience() {
           <p className="section-label">Experience & Internships</p>
           <h2 className="section-title">Where systems ship at scale.</h2>
           <p className="section-lead">
-            From Standard Chartered’s RAG and MCP agent workflows to Kafka-backed microservices at
-            Logistiq — production impact across backend systems and applied AI.
+            Banking platforms at Standard Chartered, logistics backends at Landmark Group’s Logistiq,
+            and teaching at IIT Kharagpur — shipping production systems while mentoring the next
+            wave of engineers.
           </p>
         </Reveal>
 

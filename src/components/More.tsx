@@ -1,4 +1,4 @@
-import { achievements, education, mentorship } from "../data/content"
+import { achievements, education, mentorship, recommendation } from "../data/content"
 import { Reveal, Stagger } from "./Reveal"
 
 export function More() {
@@ -59,6 +59,22 @@ export function More() {
               </div>
             ))}
           </Stagger>
+        </div>
+
+        <div style={{ marginTop: "4.5rem" }}>
+          <Reveal>
+            <p className="section-label">Recommendation</p>
+            <h2 className="section-title">What collaborators say.</h2>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <blockquote className="recommendation">
+              <p>“{recommendation.quote}”</p>
+              <footer>
+                — {recommendation.author}
+                <span> · {recommendation.context}</span>
+              </footer>
+            </blockquote>
+          </Reveal>
         </div>
       </div>
     </section>
