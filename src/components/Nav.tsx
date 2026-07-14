@@ -14,6 +14,8 @@ const links = [
 export function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [firstName, ...rest] = profile.name.split(" ")
+  const lastName = rest.join(" ")
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -39,7 +41,7 @@ export function Nav() {
       >
         <div className="nav-inner">
           <a className="nav-brand" href="#top" onClick={() => setOpen(false)}>
-            Sampurna <span>Mandal</span>
+            {firstName} <span>{lastName}</span>
           </a>
 
           <ul className="nav-links">

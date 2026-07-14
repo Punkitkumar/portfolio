@@ -17,6 +17,8 @@ function splitChars(text: string) {
 
 export function Hero() {
   const rootRef = useRef<HTMLElement>(null)
+  const [firstName, ...rest] = profile.name.split(" ")
+  const lastName = rest.join(" ")
 
   useLayoutEffect(() => {
     const root = rootRef.current
@@ -193,8 +195,8 @@ export function Hero() {
         <p className="hero-role hero-anim">{profile.role}</p>
 
         <h1 className="hero-brand" aria-label={profile.name}>
-          <span className="line">{splitChars("Sampurna")}</span>
-          <span className="line">{splitChars("Mandal")}</span>
+          <span className="line">{splitChars(firstName)}</span>
+          <span className="line">{splitChars(lastName)}</span>
         </h1>
 
         <p className="hero-headline hero-anim">{profile.headline}</p>

@@ -44,9 +44,8 @@ export function Experience() {
           <p className="section-label">Experience & Internships</p>
           <h2 className="section-title">Where systems ship at scale.</h2>
           <p className="section-lead">
-            From BlackRock’s multi-tenant data platforms and GenAI at Dr. Reddy’s to research
-            internships at UPES and IIM Calcutta — production impact across infrastructure and
-            applied ML.
+            From Standard Chartered’s RAG and MCP agent workflows to Kafka-backed microservices at
+            Logistiq — production impact across backend systems and applied AI.
           </p>
         </Reveal>
 

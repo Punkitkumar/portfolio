@@ -4,9 +4,9 @@ import { profile } from "../data/content"
 import { Reveal, Stagger } from "./Reveal"
 
 const stats = [
-  { value: "91%", label: "Workflow automation at BlackRock" },
-  { value: "200+", label: "Enterprise clients on K8s platforms" },
-  { value: "Top 0.2%", label: "Kharagpur DS Hackathon ranking" },
+  { value: "60–70%", label: "Story investigation time saved via MCP agents" },
+  { value: "30,000+", label: "Confluence pages in production RAG corpus" },
+  { value: "Top 2.9%", label: "LeetCode ranking · Knight 1968" },
 ]
 
 export function About() {
@@ -85,7 +85,7 @@ export function About() {
       <div className="container">
         <Reveal>
           <p className="section-label">About</p>
-          <h2 className="section-title">Applied AI meets enterprise data platforms.</h2>
+          <h2 className="section-title">Backend systems meet applied AI at scale.</h2>
         </Reveal>
 
         <div className="about-grid">
@@ -93,9 +93,9 @@ export function About() {
             <div className="about-text">
               <p>{profile.summary}</p>
               <p>
-                Interested in roles spanning Data Scientist, ML Engineer, AI Engineer, GenAI
-                Engineer, and Forward Deployed Engineer — where model quality, retrieval systems,
-                and production infrastructure meet.
+                Interested in roles spanning Backend Engineer, Applied AI / ML Engineer, and
+                Distributed Systems — where reliable services, retrieval systems, and intelligent
+                automation meet.
               </p>
               <div className="interest-row">
                 {profile.interests.map((item) => (

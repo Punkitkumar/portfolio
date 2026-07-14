@@ -74,10 +74,10 @@ export function Domains() {
       <div className="container">
         <Reveal>
           <p className="section-label">Domains</p>
-          <h2 className="section-title">At the intersection of Business, Tech & AI.</h2>
+          <h2 className="section-title">At the intersection of Backend, AI & Systems.</h2>
           <p className="section-lead">
-            Built for Forward Deployed Engineer work — sitting where business problems, production
-            tech, and applied AI meet across finance, healthcare, and engineering.
+            Built for production engineering — sitting where backend reliability, distributed
+            systems, and applied AI meet across finance, logistics, and enterprise platforms.
           </p>
         </Reveal>
 
@@ -87,8 +87,8 @@ export function Domains() {
               <div className="orbit-ring orbit-ring-a" />
               <div className="orbit-ring orbit-ring-b" />
               <div className="orbit-core pulse-glow">
-                <span className="orbit-core-label">Forward Deployed</span>
-                <span className="orbit-core-title">Business × Tech × AI</span>
+                <span className="orbit-core-label">Full Stack Engineer</span>
+                <span className="orbit-core-title">Backend × AI × Systems</span>
               </div>
               <div className="orbit-spinner">
                 {domains.map((d, i) => {

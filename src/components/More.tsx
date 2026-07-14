@@ -1,4 +1,4 @@
-import { achievements, education, leadership } from "../data/content"
+import { achievements, education, mentorship } from "../data/content"
 import { Reveal, Stagger } from "./Reveal"
 
 export function More() {
@@ -48,11 +48,11 @@ export function More() {
 
         <div style={{ marginTop: "4.5rem" }}>
           <Reveal>
-            <p className="section-label">Leadership</p>
-            <h2 className="section-title">Building communities that last.</h2>
+            <p className="section-label">Mentorship</p>
+            <h2 className="section-title">Teaching the next generation of engineers.</h2>
           </Reveal>
           <Stagger stagger={0.1} selector=":scope > .lead-item">
-            {leadership.map((l) => (
+            {mentorship.map((l) => (
               <div className="lead-item" key={l.title}>
                 <h3>{l.title}</h3>
                 <p>{l.detail}</p>

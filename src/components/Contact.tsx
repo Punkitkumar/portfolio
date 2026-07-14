@@ -63,8 +63,8 @@ export function Contact() {
           <p className="section-label">Contact</p>
           <h2 className="section-title">Let’s build the next system together.</h2>
           <p className="section-lead">
-            Open to Data Scientist, ML Engineer, AI Engineer, GenAI Engineer, and Forward Deployed
-            Engineer opportunities. Reach out for collaborations, roles, or a quick chat.
+            Open to Backend Engineer, Applied AI / ML Engineer, and Distributed Systems
+            opportunities. Reach out for collaborations, roles, or a quick chat.
           </p>
 
           <div className="contact-links">
@@ -76,6 +76,16 @@ export function Contact() {
             <Magnetic strength={0.4}>
               <a href={profile.linkedin} target="_blank" rel="noreferrer">
                 LinkedIn
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.4}>
+              <a href={profile.github} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.35}>
+              <a href={profile.leetcode} target="_blank" rel="noreferrer">
+                LeetCode
               </a>
             </Magnetic>
             {profile.phones.map((phone) => (
@@ -90,7 +100,7 @@ export function Contact() {
           <span>
             © {new Date().getFullYear()} {profile.name}
           </span>
-          <span>ML / AI Engineer · Data Engineer · IIT Kharagpur</span>
+          <span>Backend Engineer · Applied AI / ML · IIT Kharagpur</span>
         </footer>
       </div>
     </section>

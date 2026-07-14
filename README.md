@@ -1,6 +1,6 @@
-# Sampurna Mandal — Personal Portfolio
+# Punkit Kumar — Personal Portfolio
 
-Fully animated personal portfolio for **Sampurna Mandal** (ML / AI Engineer | Data Engineer).
+Fully animated personal portfolio for **Punkit Kumar** (Backend Engineer | Applied AI / ML Engineer | Distributed Systems).
 
 ## Stack
 
@@ -21,7 +21,7 @@ npm run dev
 `render.yaml` is already in the repo. Fastest path:
 
 1. Open [Render → New Static Site](https://dashboard.render.com/select-repo?type=static) and sign in (GitHub recommended).
-2. Connect **`Sampurnaaa/porfolio`**, branch **`master`**.
+2. Connect your GitHub repository and branch.
 3. Use:
    - **Build Command:** `npm ci && npm run build`
    - **Publish Directory:** `dist`

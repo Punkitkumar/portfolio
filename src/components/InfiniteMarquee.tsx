@@ -2,17 +2,17 @@ import { useLayoutEffect, useRef } from "react"
 import gsap from "gsap"
 
 const ITEMS = [
-  "Forward Deployed Engineer",
-  "Business × Tech × AI",
-  "GenAI",
+  "Backend Engineer",
+  "Applied AI / ML",
+  "Distributed Systems",
   "RAG",
-  "Kubernetes",
-  "Milvus",
-  "BlackRock",
+  "MCP Agents",
+  "Hybrid Search",
+  "Spring Boot",
+  "Kafka",
+  "Standard Chartered",
   "IIT Kharagpur",
-  "Multi-Agent LLM",
-  "Snowflake",
-  "Computer Vision",
+  "LeetCode Knight",
   "FastAPI",
 ]
 
