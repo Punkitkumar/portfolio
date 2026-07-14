@@ -6,6 +6,7 @@ export const profile = {
   phones: ["+91 72090 63839"],
   linkedin: "https://www.linkedin.com/in/punkit-kumar-11a72a1b9/",
   github: "https://github.com/Punkitkumar",
+  githubHandle: "Punkitkumar",
   leetcode: "https://leetcode.com/u/punkitkumar/",
   location: "Bengaluru, India",
   college: "IIT Kharagpur",

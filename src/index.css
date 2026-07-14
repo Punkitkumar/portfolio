@@ -412,6 +412,20 @@ button,
   transform: translateY(-1px) scale(0.98);
 }
 
+.nav-cta-ghost {
+  background: transparent;
+  color: var(--ink) !important;
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.nav-cta-ghost:hover {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--teal) !important;
+  border-color: rgba(20, 184, 166, 0.35);
+  box-shadow: 0 8px 20px rgba(11, 31, 28, 0.08);
+}
+
 .nav-toggle {
   display: none;
   width: 2.5rem;

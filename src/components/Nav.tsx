@@ -51,6 +51,11 @@ export function Nav() {
               </li>
             ))}
             <li>
+              <a className="nav-cta nav-cta-ghost" href={profile.github} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+            </li>
+            <li>
               <a className="nav-cta" href={profile.linkedin} target="_blank" rel="noreferrer">
                 LinkedIn
               </a>
@@ -87,6 +92,11 @@ export function Nav() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a href={profile.github} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>
+                  GitHub
+                </a>
+              </li>
               <li>
                 <a href={profile.linkedin} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>
                   LinkedIn

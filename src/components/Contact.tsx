@@ -74,13 +74,13 @@ export function Contact() {
               </a>
             </Magnetic>
             <Magnetic strength={0.4}>
-              <a href={profile.linkedin} target="_blank" rel="noreferrer">
-                LinkedIn
+              <a href={profile.github} target="_blank" rel="noreferrer">
+                GitHub · {profile.githubHandle}
               </a>
             </Magnetic>
             <Magnetic strength={0.4}>
-              <a href={profile.github} target="_blank" rel="noreferrer">
-                GitHub
+              <a href={profile.linkedin} target="_blank" rel="noreferrer">
+                LinkedIn
               </a>
             </Magnetic>
             <Magnetic strength={0.35}>

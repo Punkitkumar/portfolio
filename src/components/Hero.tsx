@@ -219,6 +219,11 @@ export function Hero() {
             </a>
           </Magnetic>
           <Magnetic strength={0.5}>
+            <a className="btn-ghost hero-anim" href={profile.github} target="_blank" rel="noreferrer">
+              View GitHub
+            </a>
+          </Magnetic>
+          <Magnetic strength={0.5}>
             <a className="btn-ghost hero-anim" href={profile.linkedin} target="_blank" rel="noreferrer">
               View LinkedIn
             </a>
