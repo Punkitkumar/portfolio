@@ -9,7 +9,12 @@ const DIST = path.join(__dirname, "dist")
 const DATA_DIR = path.join(__dirname, ".data")
 const VISITS_FILE = path.join(DATA_DIR, "visits.json")
 const PORT = Number(process.env.PORT || 4173)
-const ADMIN_PASS = process.env.VISITORS_PASS || "punkit-admin"
+const ADMIN_PASS = process.env.VISITORS_PASS
+if (!ADMIN_PASS) {
+  console.warn(
+    "[visitors] Set VISITORS_PASS in your environment (or .env) — visitor dashboard stays locked until then.",
+  )
+}
 const MAX_VISITS = 2000
 
 const MIME = {
@@ -127,7 +132,7 @@ async function handleApi(req, res, url) {
 
   if (url.pathname === "/api/visits" && req.method === "GET") {
     const pass = url.searchParams.get("pass") || req.headers["x-visitors-pass"]
-    if (pass !== ADMIN_PASS) {
+    if (!ADMIN_PASS || pass !== ADMIN_PASS) {
       sendJson(res, 401, { ok: false, error: "Unauthorized" })
       return true
     }

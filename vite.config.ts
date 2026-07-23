@@ -1,11 +1,10 @@
-import { defineConfig, type Plugin } from "vite"
+import { defineConfig, loadEnv, type Plugin } from "vite"
 import react from "@vitejs/plugin-react"
 import { mkdir, readFile, writeFile, access } from "node:fs/promises"
 import path from "node:path"
 
 const DATA_DIR = path.resolve(".data")
 const VISITS_FILE = path.join(DATA_DIR, "visits.json")
-const ADMIN_PASS = process.env.VISITORS_PASS || "punkit-admin"
 const MAX_VISITS = 2000
 
 async function ensureStore() {
@@ -27,10 +26,14 @@ async function readVisits() {
   }
 }
 
-function visitorsApiPlugin(): Plugin {
+function visitorsApiPlugin(adminPass: string | undefined): Plugin {
   return {
     name: "visitors-api",
     configureServer(server) {
+      if (!adminPass) {
+        console.warn("[visitors] Set VISITORS_PASS in .env for local dashboard access.")
+      }
+
       server.middlewares.use(async (req, res, next) => {
         if (!req.url?.startsWith("/api/")) return next()
 
@@ -85,7 +88,7 @@ function visitorsApiPlugin(): Plugin {
 
         if (url.pathname === "/api/visits" && req.method === "GET") {
           const pass = url.searchParams.get("pass")
-          if (pass !== ADMIN_PASS) {
+          if (!adminPass || pass !== adminPass) {
             send(401, { ok: false, error: "Unauthorized" })
             return
           }
@@ -115,6 +118,11 @@ function visitorsApiPlugin(): Plugin {
   }
 }
 
-export default defineConfig({
-  plugins: [react(), visitorsApiPlugin()],
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "")
+  const adminPass = env.VISITORS_PASS || process.env.VISITORS_PASS
+
+  return {
+    plugins: [react(), visitorsApiPlugin(adminPass)],
+  }
 })

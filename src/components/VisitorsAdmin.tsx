@@ -25,7 +25,6 @@ type VisitsResponse = {
 }
 
 const PASS_KEY = "pk_visitors_pass"
-const DEFAULT_PASS = "punkit-admin"
 
 function topEntries(map: Record<string, number>, limit = 6) {
   return Object.entries(map)
@@ -49,14 +48,17 @@ export function VisitorsAdmin() {
   }, [])
 
   async function load(nextPass = pass) {
-    if (!nextPass) return
+    if (!nextPass.trim()) {
+      setError("Enter your admin password.")
+      return
+    }
     setLoading(true)
     setError("")
     try {
       const res = await fetch(`/api/visits?pass=${encodeURIComponent(nextPass)}`)
       const json = (await res.json()) as VisitsResponse
       if (!res.ok || !json.ok) {
-        setError(json.error || "Could not load visits")
+        setError(json.error || "Incorrect password or could not load visits")
         setData(null)
         return
       }
@@ -103,21 +105,19 @@ export function VisitorsAdmin() {
             className="visitors-login"
             onSubmit={(e) => {
               e.preventDefault()
-              void load(input || DEFAULT_PASS)
+              void load(input)
             }}
           >
-            <p>
-              Enter the admin pass to view visit logs (country, city, referrer, device). Default pass:{" "}
-              <code>{DEFAULT_PASS}</code>
-            </p>
+            <p>Enter your private admin password to view visit logs.</p>
             <input
               type="password"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Admin pass"
+              placeholder="Admin password"
+              autoComplete="current-password"
               autoFocus
             />
-            <button type="submit" className="btn-primary" disabled={loading}>
+            <button type="submit" className="btn-primary" disabled={loading || !input.trim()}>
               {loading ? "Loading…" : "Open dashboard"}
             </button>
             {error ? <p className="visitors-error">{error}</p> : null}

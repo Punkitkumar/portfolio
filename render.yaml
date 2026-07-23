@@ -10,6 +10,6 @@ services:
       - key: NODE_VERSION
         value: "22"
       - key: VISITORS_PASS
-        value: punkit-admin
+        sync: false
       - key: VITE_GA_MEASUREMENT_ID
         sync: false
