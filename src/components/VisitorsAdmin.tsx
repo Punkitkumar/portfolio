@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
+import { VISITS_STORE, VISITORS_PASS_HASH, sha256Hex } from "../tracker"
 
 type Visit = {
   id: string
@@ -12,6 +13,7 @@ type Visit = {
   city?: string
   region?: string
   ua?: string
+  _id?: string
 }
 
 type VisitsResponse = {
@@ -30,6 +32,39 @@ function topEntries(map: Record<string, number>, limit = 6) {
   return Object.entries(map)
     .sort((a, b) => b[1] - a[1])
     .slice(0, limit)
+}
+
+function summarize(raw: Visit[]): VisitsResponse {
+  const visits = raw
+    .map((v) => ({
+      ...v,
+      id: v.id || v._id || `${v.ts}-${v.path}`,
+      ts: v.ts || new Date().toISOString(),
+      path: v.path || "/",
+      referrer: v.referrer || "direct",
+      language: v.language || "",
+      timezone: v.timezone || "",
+      screen: v.screen || "",
+    }))
+    .sort((a, b) => +new Date(b.ts) - +new Date(a.ts))
+
+  const countries: Record<string, number> = {}
+  const cities: Record<string, number> = {}
+  const paths: Record<string, number> = {}
+  for (const v of visits) {
+    if (v.country) countries[v.country] = (countries[v.country] || 0) + 1
+    if (v.city) cities[v.city] = (cities[v.city] || 0) + 1
+    if (v.path) paths[v.path] = (paths[v.path] || 0) + 1
+  }
+
+  return {
+    ok: true,
+    total: visits.length,
+    visits: visits.slice(0, 200),
+    countries,
+    cities,
+    paths,
+  }
 }
 
 export function VisitorsAdmin() {
@@ -52,21 +87,43 @@ export function VisitorsAdmin() {
       setError("Enter your admin password.")
       return
     }
+
     setLoading(true)
     setError("")
+
     try {
-      const res = await fetch(`/api/visits?pass=${encodeURIComponent(nextPass)}`)
-      const json = (await res.json()) as VisitsResponse
-      if (!res.ok || !json.ok) {
-        setError(json.error || "Incorrect password or could not load visits")
+      // Prefer local Node API when available
+      try {
+        const localRes = await fetch(`/api/visits?pass=${encodeURIComponent(nextPass)}`)
+        if (localRes.ok) {
+          const json = (await localRes.json()) as VisitsResponse
+          if (json.ok) {
+            localStorage.setItem(PASS_KEY, nextPass)
+            setPass(nextPass)
+            setData(json)
+            return
+          }
+        }
+      } catch {
+        // fall through to remote store (static hosting)
+      }
+
+      const hash = await sha256Hex(nextPass)
+      if (hash !== VISITORS_PASS_HASH) {
+        setError("Incorrect password")
         setData(null)
         return
       }
+
+      const remoteRes = await fetch(`${VISITS_STORE}/visits`)
+      if (!remoteRes.ok) throw new Error("store failed")
+      const raw = (await remoteRes.json()) as Visit[]
+      const json = summarize(Array.isArray(raw) ? raw : [])
       localStorage.setItem(PASS_KEY, nextPass)
       setPass(nextPass)
       setData(json)
     } catch {
-      setError("API unavailable. Use the Node server deploy (not static-only hosting).")
+      setError("Could not load visits. Check your connection and try again.")
       setData(null)
     } finally {
       setLoading(false)

@@ -11,6 +11,15 @@ export type VisitPayload = {
 
 const SESSION_KEY = "pk_visit_session"
 
+/** Free remote store so tracking works on static Render hosting too. */
+export const VISITS_STORE =
+  (import.meta.env.VITE_VISITS_STORE as string | undefined) ||
+  "https://crudcrud.com/api/6aba7f82c1374bf392b5845742c4b051"
+
+export const VISITORS_PASS_HASH =
+  (import.meta.env.VITE_VISITORS_PASS_HASH as string | undefined) ||
+  "60d24ddb61c89bef812829e78eadddb9f90956a7db4d191b75558319ce4b6060"
+
 function alreadyTrackedThisSession() {
   try {
     const stamp = sessionStorage.getItem(SESSION_KEY)
@@ -48,7 +57,17 @@ async function lookupGeo(): Promise<Pick<VisitPayload, "country" | "city" | "reg
   }
 }
 
-/** Record a portfolio visit for the in-site visitors dashboard. */
+async function postVisit(url: string, payload: VisitPayload) {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...payload, ts: new Date().toISOString() }),
+    keepalive: true,
+  })
+  return res.ok
+}
+
+/** Record a portfolio visit (local API and/or free remote store). */
 export async function trackVisit() {
   if (typeof window === "undefined") return
   if (alreadyTrackedThisSession()) return
@@ -63,15 +82,24 @@ export async function trackVisit() {
     ...geo,
   }
 
+  let ok = false
   try {
-    const res = await fetch("/api/visit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      keepalive: true,
-    })
-    if (res.ok) markTracked()
+    ok = (await postVisit("/api/visit", payload)) || ok
   } catch {
-    // Tracking is best-effort.
+    // static hosts have no /api — fall through to remote store
   }
+
+  try {
+    ok = (await postVisit(`${VISITS_STORE}/visits`, payload)) || ok
+  } catch {
+    // best-effort
+  }
+
+  if (ok) markTracked()
+}
+
+export async function sha256Hex(text: string) {
+  const data = new TextEncoder().encode(text)
+  const digest = await crypto.subtle.digest("SHA-256", data)
+  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("")
 }
