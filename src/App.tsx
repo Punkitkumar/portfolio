@@ -10,6 +10,7 @@ import { More } from "./components/More"
 import { Contact } from "./components/Contact"
 import { CursorTrail } from "./components/CursorTrail"
 import { FloatingOrbs } from "./components/FloatingOrbs"
+import { VisitorsAdmin } from "./components/VisitorsAdmin"
 
 export default function App() {
   useLenis()
@@ -29,6 +30,7 @@ export default function App() {
         <More />
         <Contact />
       </main>
+      <VisitorsAdmin />
     </>
   )
 }

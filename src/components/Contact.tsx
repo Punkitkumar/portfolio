@@ -101,6 +101,7 @@ export function Contact() {
             © {new Date().getFullYear()} {profile.name}
           </span>
           <span>Software Engineer · IIT Kharagpur · LeetCode Knight</span>
+          <a href="#visitors">Visitor tracker</a>
         </footer>
       </div>
     </section>
