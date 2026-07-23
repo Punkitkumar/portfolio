@@ -39,22 +39,67 @@ function markTracked() {
 }
 
 async function lookupGeo(): Promise<Pick<VisitPayload, "country" | "city" | "region">> {
-  try {
-    const res = await fetch("https://ipapi.co/json/", { signal: AbortSignal.timeout(2500) })
-    if (!res.ok) return {}
-    const data = (await res.json()) as {
-      country_name?: string
-      city?: string
-      region?: string
+  // Free IP geolocation — city-level only (not GPS). Tries multiple providers
+  // because free APIs often rate-limit or timeout on mobile networks.
+  const providers: Array<() => Promise<Pick<VisitPayload, "country" | "city" | "region">>> = [
+    async () => {
+      const res = await fetch("https://ipapi.co/json/", { signal: AbortSignal.timeout(3000) })
+      if (!res.ok) return {}
+      const data = (await res.json()) as {
+        error?: boolean
+        country_name?: string
+        city?: string
+        region?: string
+      }
+      if (data.error) return {}
+      return {
+        country: data.country_name || "",
+        city: data.city || "",
+        region: data.region || "",
+      }
+    },
+    async () => {
+      const res = await fetch("https://ipwho.is/", { signal: AbortSignal.timeout(3000) })
+      if (!res.ok) return {}
+      const data = (await res.json()) as {
+        success?: boolean
+        country?: string
+        city?: string
+        region?: string
+      }
+      if (data.success === false) return {}
+      return {
+        country: data.country || "",
+        city: data.city || "",
+        region: data.region || "",
+      }
+    },
+    async () => {
+      const res = await fetch("https://ipinfo.io/json", { signal: AbortSignal.timeout(3000) })
+      if (!res.ok) return {}
+      const data = (await res.json()) as {
+        country?: string
+        city?: string
+        region?: string
+      }
+      return {
+        country: data.country || "",
+        city: data.city || "",
+        region: data.region || "",
+      }
+    },
+  ]
+
+  for (const provider of providers) {
+    try {
+      const geo = await provider()
+      if (geo.country || geo.city || geo.region) return geo
+    } catch {
+      // try next provider
     }
-    return {
-      country: data.country_name || "",
-      city: data.city || "",
-      region: data.region || "",
-    }
-  } catch {
-    return {}
   }
+
+  return {}
 }
 
 async function postVisit(url: string, payload: VisitPayload) {

@@ -242,7 +242,8 @@ export function VisitorsAdmin() {
                     <tr key={v.id}>
                       <td>{new Date(v.ts).toLocaleString()}</td>
                       <td>
-                        {[v.city, v.region, v.country].filter(Boolean).join(", ") || "Unknown"}
+                        {[v.city, v.region, v.country].filter(Boolean).join(", ") ||
+                          "Location unavailable"}
                       </td>
                       <td>{v.path}</td>
                       <td title={v.referrer}>{v.referrer || "direct"}</td>
