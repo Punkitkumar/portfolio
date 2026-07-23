@@ -5,7 +5,8 @@ declare global {
   }
 }
 
-const MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined
+const MEASUREMENT_ID =
+  (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined) || "G-L2GE2KTCTB"
 
 function loadScript(src: string) {
   return new Promise<void>((resolve, reject) => {
